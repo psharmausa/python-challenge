@@ -27,29 +27,25 @@ with open(csvpath) as csvfile:
         
     total_votes=rnum
     print('-------------------------------------------')
-# total no. of votes by setting by the counter rnum
+    # total no. of votes by setting by the counter rnum
     print(f'Total Votes: {total_votes}')
     print('-------------------------------------------')
 
+# Now dictionary contains key and value pairs, so key has candidate name and values have no. of the votes
 # Now print the requested calculation:-
 # A complete list of candidates who received votes
-#The percentage of votes each candidate won
+# The percentage of votes each candidate won
+
     for word in pollDict:
-        print (f'{word}:  {round((pollDict[word]/rnum*100),2)}00% ({int(pollDict[word])})')
+         print (f'{word}:  {round((pollDict[word]/rnum*100),2)}00% ({int(pollDict[word])})')
     
 #The winner of the election based on popular vote.
-    max_value = 0
-    winner = ""
-    for i in pollDict:
-        votes=pollDict[i]
-        if votes > max_value:
-            max_value = votes
-            winner = i
-            print('-------------------------------------------')
-            print(f'Winner:         {i}')
-            print('-------------------------------------------')
-
-
+#get the maximum value of the candidate through python max funtion    
+m=max(pollDict, key=pollDict.get) 
+print('-------------------------------------------------')
+print(f'Winner:     {m}')
+print('-------------------------------------------------')
+  
 # write the file in text file and w is used for replacing existing file
 f = open("output_PyPoll.txt", "w")
 print('-------------------------------------------', file=f)
@@ -57,17 +53,9 @@ print(f'Total Votes: {int(total_votes)}',file=f)
 print('-------------------------------------------', file=f)
 for word in pollDict:
     print (f'{word}:  {round((pollDict[word]/rnum*100),2)}00% ({int(pollDict[word])})', file=f)
-    
-    
-max_value = 0
-winner = ""
-for i in pollDict:
-        votes=pollDict[i]
-        if votes > max_value:
-            max_value = votes
-            winner = i
-            print('-------------------------------------------',file=f)
-            print(f'Winner:         {i}',file=f)
-            print('-------------------------------------------',file=f)
+ 
+print('-------------------------------------------',file=f)
+print(f'Winner:         {m}',file=f)
+print('-------------------------------------------',file=f)
 f.close()
    
